@@ -1,11 +1,9 @@
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
 # DefaultRouter(A DRF router that automatically creates URLs for API endpoints)
-from .views import DoctorViewSet, PatientViewSet, AppoinmentViewSet
-# The views that handle API requests.
-from .views import latest_appoinment_api
-from .views import home
-from .views import UserRegisterView
+from .views import DoctorViewSet, PatientViewSet, AppoinmentViewSet,latest_appoinment_api,home,UserRegisterView
+from .views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter() 
 router.register(r'doctors', DoctorViewSet)
@@ -17,6 +15,8 @@ urlpatterns = [
     path('', home, name='home'),  # This makes '/' show the homepage
     path('api/', include(router.urls)),
     path('api/register/', UserRegisterView.as_view(), name='register'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Login endpoint
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refresh token
 ]
 
 
