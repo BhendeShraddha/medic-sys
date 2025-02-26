@@ -5,6 +5,7 @@ from .views import DoctorViewSet, PatientViewSet, AppoinmentViewSet
 # The views that handle API requests.
 from .views import latest_appoinment_api
 from .views import home
+from .views import UserRegisterView
 
 router = DefaultRouter() 
 router.register(r'doctors', DoctorViewSet)
@@ -15,6 +16,7 @@ urlpatterns = [
     path('latest-appoinment/', latest_appoinment_api),
     path('', home, name='home'),  # This makes '/' show the homepage
     path('api/', include(router.urls)),
+    path('api/register/', UserRegisterView.as_view(), name='register'),
 ]
 
 
